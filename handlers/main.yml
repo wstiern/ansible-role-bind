@@ -4,26 +4,26 @@
 # handlers file
 #
 
-- name: reload bind9
+- name: "reload {{ bind_service }}"
   service:
-    name=bind9
+    name="{{ bind_service }}"
     state=reloaded
   sudo: yes
 
-- name: restart bind9
+- name: "restart {{ bind_service }}"
   service:
-    name=bind9
+    name="{{ bind_service }}"
     state=restarted
   sudo: yes
 
-- name: start bind9
+- name: "start {{ bind_service }}"
   service:
-    name=bind9
+    name="{{ bind_service }}"
     state=started
   sudo: yes
 
-- name: stop bind9
+- name: "stop {{ bind_service }}"
   service:
-    name=bind9
+    name="{{ bind_service }}"
     state=stopped
   sudo: yes

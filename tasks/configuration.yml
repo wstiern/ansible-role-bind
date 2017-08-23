@@ -7,7 +7,7 @@
 - name: configuration | ensure integrity of /etc/default/bind9 file
   template:
     src=etc/default/bind9.j2
-    dest=/etc/default/bind9
+    dest="{{ defaults_directory }}/bind9"
     owner=root
     group=root
     mode=0644
@@ -16,7 +16,7 @@
 - name: configuration | ensure integrity of /etc/bind/named.conf.* files
   template:
     src="etc/bind/named.conf{{ item }}.j2"
-    dest="/etc/bind/named.conf{{ item }}"
+    dest="{{ named_path }}/named.conf{{ item }}"
     owner=root
     group=root
     mode=0644
@@ -34,8 +34,8 @@
   template:
     src=var/cache/bind/db.name.zone.j2
     dest="{{ bind_dir_cache }}/db.{{ item.key }}.zone"
-    owner=bind
-    group=bind
+    owner="{{ bind_user }}"
+    group="{{ bind_user }}"
     mode=0644
   with_dict: "{{ bind_zone_databases }}"
   notify: restart bind9

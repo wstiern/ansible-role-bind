@@ -1,0 +1,12 @@
+bind_user: named
+bind_service: named
+
+defaults_directory: /etc/sysconfig
+
+named_path: /etc
+
+bind_dir_cache: /var/named
+
+packages:
+  - bind
+  - dns-utils

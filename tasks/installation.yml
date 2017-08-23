@@ -4,18 +4,17 @@
 # installation tasks.
 #
 
-- name: installation | ensure bind9 and dnsutils are installed
+- name: installation | install packages
   apt:
     name="{{ item }}"
     state=present
   with_items:
-    - bind9
-    - dnsutils
+    - "{{ packages }}"
 
 - name: installation | ensure log directory is present
   file:
     path="{{ bind_dir_log }}"
     state=directory
-    owner=bind
-    group=bind
+    owner="{{ bind_user }}"
+    group="{{ bind_user }}"
     mode=0755
