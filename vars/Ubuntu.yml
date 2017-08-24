@@ -4,6 +4,7 @@ bind_service: bind9
 defaults_directory: /etc/defaults
 
 named_path: /etc/bind
+named_configs_path: /etc/bind
 
 bind_dir_cache: /var/cache/bind
 

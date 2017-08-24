@@ -4,7 +4,7 @@
 # tasks file
 #
 
-- include: "vars/{{ ansible_distribution }}.yml"
+- include_vars: "vars/{{ ansible_distribution }}.yml"
 
 - include: debug.yml
   when: debug | default(false)

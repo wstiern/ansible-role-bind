@@ -4,25 +4,25 @@
 # handlers file
 #
 
-- name: "reload {{ bind_service }}"
+- name: "reload bind"
   service:
     name="{{ bind_service }}"
     state=reloaded
   sudo: yes
 
-- name: "restart {{ bind_service }}"
+- name: "restart bind"
   service:
     name="{{ bind_service }}"
     state=restarted
   sudo: yes
 
-- name: "start {{ bind_service }}"
+- name: "start bind"
   service:
     name="{{ bind_service }}"
     state=started
   sudo: yes
 
-- name: "stop {{ bind_service }}"
+- name: "stop bind"
   service:
     name="{{ bind_service }}"
     state=stopped

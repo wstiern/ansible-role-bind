@@ -5,7 +5,7 @@
 #
 
 - name: installation | install packages
-  apt:
+  package:
     name="{{ item }}"
     state=present
   with_items:

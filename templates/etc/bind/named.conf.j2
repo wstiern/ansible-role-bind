@@ -5,22 +5,22 @@
 // structure of BIND configuration files in Debian, *BEFORE* you customize
 // this configuration file.
 //
-// If you are just adding zones, please do that in /etc/bind/named.conf.local
+// If you are just adding zones, please do that in {{ named_configs_path }}/named.conf.local
 
 {% if bind_named_conf_acl is defined %}
-include "/etc/bind/named.conf.acl";
+include "{{ named_configs_path }}/named.conf.acl";
 {% endif %}
-include "/etc/bind/named.conf.options";
+include "{{ named_configs_path }}/named.conf.options";
 {% if bind_named_conf_keys is defined %}
-include "/etc/bind/named.conf.keys";
+include "{{ named_configs_path }}/named.conf.keys";
 {% endif %}
 {% if bind_named_conf_logging is defined %}
-include "/etc/bind/named.conf.logging";
+include "{{ named_configs_path }}/named.conf.logging";
 {% endif %}
 {% if bind_named_conf_controls is defined %}
-include "/etc/bind/named.conf.controls";
+include "{{ named_configs_path }}/named.conf.controls";
 {% endif %}
-include "/etc/bind/named.conf.default-zones";
+include "{{ named_configs_path }}/named.conf.default-zones";
 {% if bind_zones is defined %}
-include "/etc/bind/named.conf.local";
+include "{{ named_configs_path }}/named.conf.local";
 {% endif %}

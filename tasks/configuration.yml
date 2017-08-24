@@ -4,16 +4,16 @@
 # configuration tasks.
 #
 
-- name: configuration | ensure integrity of /etc/default/bind9 file
+- name: "configuration | ensure integrity of {{ defaults_directory }}/{{ bind_service }} file"
   template:
     src=etc/default/bind9.j2
-    dest="{{ defaults_directory }}/bind9"
+    dest="{{ defaults_directory }}/{{ bind_service }}"
     owner=root
     group=root
     mode=0644
-  notify: restart bind9
+  notify: restart bind
 
-- name: configuration | ensure integrity of /etc/bind/named.conf.* files
+- name: "configuration | ensure integrity of {{ named_path }}/named.conf file"
   template:
     src="etc/bind/named.conf{{ item }}.j2"
     dest="{{ named_path }}/named.conf{{ item }}"
@@ -22,13 +22,23 @@
     mode=0644
   with_items:
     - ''
+  notify: restart bind
+
+- name: "configuration | ensure integrity of {{ named_configs_path }}/named.conf.* files"
+  template:
+    src="etc/bind/named.conf{{ item }}.j2"
+    dest="{{ named_configs_path }}/named.conf{{ item }}"
+    owner=root
+    group=root
+    mode=0644
+  with_items:
     - '.acl'
     - '.controls'
     - '.keys'
     - '.local'
     - '.logging'
     - '.options'
-  notify: restart bind9
+  notify: restart bind
 
 - name: configuration | generate custom zone databases
   template:
@@ -38,5 +48,5 @@
     group="{{ bind_user }}"
     mode=0644
   with_dict: "{{ bind_zone_databases }}"
-  notify: restart bind9
+  notify: restart bind
 
